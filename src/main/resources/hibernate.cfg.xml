@@ -17,7 +17,7 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <!--        <property name="hbm2ddl.auto">create-drop</property>-->
-        <mapping class="State2.Personnel" />
-        <mapping class="State2.Vacation" />
+        <mapping class="State2.entity.Personnel" />
+        <mapping class="State2.entity.Vacation" />
     </session-factory>
 </hibernate-configuration>

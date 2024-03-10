@@ -2,6 +2,7 @@ package State2;
 
 
 import Dao.PersonnelDao;
+import State2.db.Database;
 import State2.db.Storage;
 import State2.entity.Personnel;
 import State2.entity.Vacation;
@@ -9,6 +10,8 @@ import State2.service.PersonnelService;
 import State2.service.VacationService;
 
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -18,8 +21,18 @@ import java.util.*;
 
 public class View {
     public static void main(String[] args) {
+        try {
+            Connection conn= Database.getConnection();
+            for(int i=1;i<=5;i++){
+                System.out.println(i+"  ");
+                Thread.sleep(1000);
+            }
+            System.out.println();
 
-        boolean run;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        boolean isNewOp;
 
         do {
 
@@ -48,13 +61,13 @@ public class View {
                     if(PersonnelService.validateNationalCode(nc)){
                         System.out.println("enter first name");
                         Scanner s2 = new Scanner(System.in);
-                        String fn = s1.nextLine();
+                        String fn = s2.nextLine();
                         System.out.println("enter last name");
                         Scanner s3 = new Scanner(System.in);
-                        String ln = s1.nextLine();
+                        String ln = s3.nextLine();
                         System.out.println("enter city name");
                         Scanner s4 = new Scanner(System.in);
-                        String cn = s1.nextLine();
+                        String cn = s4.nextLine();
                         Personnel p12=new Personnel(nc, fn, ln, cn);
                         if(PersonnelService.validateAddPersonnel(p12)){
                             PersonnelService.addPersonnel(p12);
@@ -139,9 +152,10 @@ public class View {
                         if (PersonnelService.validateNationalCode(in15)) {
                             System.out.println("Enter old Date");
                             Scanner s16 = new Scanner(System.in);
-                            String dateStrin = s16.next();
+                            String dateStrin = s16.nextLine();
+
                             SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy");
-                            Date datee1 = null;
+                            Date datee1;
                             try {
                                 datee1 = sdf12.parse(dateStrin);
                             } catch (ParseException e) {
@@ -149,9 +163,9 @@ public class View {
                             }
                             System.out.println("Enter new Date");
                             Scanner s26 = new Scanner(System.in);
-                            String dateStri = s26.next();
+                            String dateStri = s26.nextLine();
                             SimpleDateFormat sdf11 = new SimpleDateFormat("dd/MM/yyyy");
-                            Date datee2 = null;
+                            Date datee2;
                             try {
                                 datee2 = sdf11.parse(dateStri);
                             } catch (ParseException e) {
@@ -163,7 +177,6 @@ public class View {
                                 System.out.println(datee1);
                                 if (v.getDate().equals(datee1)) {
                                     VacationService.updateVacation(v, in15, datee2);
-                                    System.out.println("new vacations list:"+Storage.getInstance().getVacations());
 
                                 }else{
                                     System.out.println("nashod");
@@ -204,13 +217,16 @@ public class View {
                                 VacationService.deleteVacation(v);
 
                             }
+                            else {
+                                System.out.println("this record doesn't exist");
+                            }
                         }
-                        System.out.println("this record doesn't exist");
+
 
                     }
                     break;
                 case 9:
-                    run=false;
+                    isNewOp=false;
                     break;
                 default:
                     System.out.println("invalid number");
@@ -220,12 +236,17 @@ public class View {
             System.out.println("run program again?(true/false):");
             Scanner w=new Scanner(System.in);
             Boolean answer=w.nextBoolean();
-            run=PersonnelService.runProgram(answer);
+            isNewOp=PersonnelService.runProgram(answer);
 
 
-        } while (run == true);
+        } while (isNewOp == true);
 
 
+        try {
+            new Database().closeConnection();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
     }

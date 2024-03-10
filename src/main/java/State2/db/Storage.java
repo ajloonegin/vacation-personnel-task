@@ -3,6 +3,8 @@ package State2.db;
 import State2.entity.Personnel;
 import State2.entity.Vacation;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Storage {
@@ -16,14 +18,18 @@ public class Storage {
         personnels.add(new Personnel("0610272616","Ali","gholami","Arak"));
         personnels.add(new Personnel("0610272613","hossein","rahimi","karaj"));
         personnels.add(new Personnel("0610272352","sadaf","alizadeh","bushehr"));
-        personnels.add(new Personnel("0610272253","akbar","sadeghi","tehran"));
+        personnels.add(new Personnel("0610223542","akbar","sadeghi","tehran"));
 
 
+        try {
+            vacations.add(new Vacation("0610272616",new SimpleDateFormat("dd/MM/yyyy").parse("06/07/2000")));
+            vacations.add(new Vacation("0610223542",new SimpleDateFormat("dd/MM/yyyy").parse("07/05/2020")));
+            vacations.add(new Vacation("0610272616",new SimpleDateFormat("dd/MM/yyyy").parse("09/12/2018")));
+            vacations.add(new Vacation("0610223542",new SimpleDateFormat("dd/MM/yyyy").parse("30/09/2011")));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
-        vacations.add(new Vacation("0610272616",new Date("12/11/1998")));
-        vacations.add(new Vacation("0610272616",new Date("07/05/2020")));
-        vacations.add(new Vacation("0610272352",new Date("09/12/2018")));
-        vacations.add(new Vacation("0610272253",new Date("30/09/2011")));
     }
 
     private Storage() {
@@ -45,7 +51,8 @@ public class Storage {
     public String toString() {
         return "Storage:"+"{"+personnels+","+vacations+"}";
     }
-    //    public boolean doneAddPersonnel(){
+
+//    public boolean doneAddPersonnel(){
 //
 //
 //    }

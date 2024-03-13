@@ -2,7 +2,7 @@ package State2.service;
 
 
 import Dao.VacationDao;
-import State2.db.Storage;
+
 import State2.entity.Personnel;
 import State2.entity.Vacation;
 
@@ -14,9 +14,6 @@ public class VacationService {
     static VacationDao vacationDao = new VacationDao();
     public static boolean addVacation(Vacation v){
         try {
-            Storage storage=Storage.getInstance();
-
-
 
             vacationDao.save(v);
             return true;
@@ -28,22 +25,21 @@ public class VacationService {
     }
 
     public static Set<Vacation> showVacations(String ncCode){
-        Storage storage=Storage.getInstance();
-
-
         return vacationDao.get(ncCode);
+
+    }
+    public static Set<Vacation> getAll(){
+        return vacationDao.getAll();
 
     }
 
     public static void updateVacation(Vacation v, String in15,Date datee){
-        Storage storage=Storage.getInstance();
+//        Storage storage=Storage.getInstance();
         System.out.println("service running");
         vacationDao.update(v, in15,datee);
 
     }
     public static void deleteVacation(Vacation vd){
-        Storage storage=Storage.getInstance();
-
         vacationDao.delete(vd);
 
     }
@@ -54,8 +50,8 @@ public class VacationService {
     }
 
     public static Boolean validateAddVacation(Vacation v){
-        if(Storage.getInstance().getVacations().contains(v)){
-            System.out.println("personnel is alredy exist");
+        if(v==null){
+            System.out.println("vacation is null");
             return false;
         }
         return true;

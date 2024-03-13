@@ -1,7 +1,7 @@
 package State2.service;
 
 import Dao.PersonnelDao;
-import State2.db.Storage;
+
 import State2.entity.Personnel;
 
 import java.util.*;
@@ -21,7 +21,6 @@ public class PersonnelService {
 //add personnel to storage
     public static boolean addPersonnel(Personnel p){
         try {
-            Storage storage=Storage.getInstance();
             personnelDao.save(p);
             return true;
         }catch (Exception e){
@@ -34,18 +33,20 @@ public class PersonnelService {
 
     //search personnel of storage
     public static Personnel searchPersonnel(String ncCode){
-        Storage storage=Storage.getInstance();
         return personnelDao.get(ncCode);
 
     }
+    public static Set<Personnel> getAll(){
+        return personnelDao.getAll();
+
+    }
     public static void updatePersonnel(Personnel p, String[] params){
-        Storage storage=Storage.getInstance();
 
         personnelDao.update(p, params);
 
     }
     public static void deletePersonnel(Personnel pd){
-        Storage storage=Storage.getInstance();
+//        Storage storage=Storage.getInstance();
 
         personnelDao.delete(pd);
 
@@ -59,14 +60,11 @@ public class PersonnelService {
 
 
     public static boolean validateAddPersonnel(Personnel p){
-        if (Storage.getInstance().getPersonnels().contains(p)){
-            System.out.println("personnel is alredy exist");
-            return false;
-        }else if(p==null){
+       if(p==null){
             System.out.println("p is null!");
             return false;
-        }
-        return true;
+       }
+       return true;
 
     }
 

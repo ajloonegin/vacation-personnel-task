@@ -3,7 +3,6 @@ package State2;
 
 import Dao.PersonnelDao;
 import State2.db.Database;
-import State2.db.Storage;
 import State2.entity.Personnel;
 import State2.entity.Vacation;
 import State2.service.PersonnelService;
@@ -21,17 +20,7 @@ import java.util.*;
 
 public class View {
     public static void main(String[] args) {
-        try {
-            Connection conn= Database.getConnection();
-            for(int i=1;i<=5;i++){
-                System.out.println(i+"  ");
-                Thread.sleep(1000);
-            }
-            System.out.println();
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         boolean isNewOp;
 
         do {
@@ -72,7 +61,7 @@ public class View {
                         if(PersonnelService.validateAddPersonnel(p12)){
                             PersonnelService.addPersonnel(p12);
                             System.out.println("Pesrsonnel added");
-                            System.out.println(Storage.getInstance().getPersonnels());
+                            PersonnelService.getAll();
                         }
                     }
                     break;
@@ -240,13 +229,6 @@ public class View {
 
 
         } while (isNewOp == true);
-
-
-        try {
-            new Database().closeConnection();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
 
     }

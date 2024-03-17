@@ -80,11 +80,11 @@ public class View {
                     Scanner s6 = new Scanner(System.in);
                     String nc6 = s6.nextLine();
                     if(PersonnelService.validateNationalCode(nc6)){
-                        System.out.println("enter date of vacation with dd/MM/yyyy format");
+                        System.out.println("enter date of vacation with yyyy-MM-dd format");
                         Scanner s7 = new Scanner(System.in);
                         String dateStr = s7.next();
-                        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-                        Date date = null;
+                        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date;
                         try {
                             date = sdf1.parse(dateStr);
                         } catch (ParseException e) {
@@ -147,7 +147,7 @@ public class View {
                             Scanner s16 = new Scanner(System.in);
                             String dateStrin = s16.nextLine();
 
-                            SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy");
+                            SimpleDateFormat sdf12 = new SimpleDateFormat("yyyy-MM-dd");
                             Date datee1;
                             try {
                                 datee1 = sdf12.parse(dateStrin);
@@ -157,7 +157,7 @@ public class View {
                             System.out.println("Enter new Date");
                             Scanner s26 = new Scanner(System.in);
                             String dateStri = s26.nextLine();
-                            SimpleDateFormat sdf11 = new SimpleDateFormat("dd/MM/yyyy");
+                            SimpleDateFormat sdf11 = new SimpleDateFormat("yyyy-MM-dd");
                             Date datee2;
                             try {
                                 datee2 = sdf11.parse(dateStri);
@@ -169,7 +169,7 @@ public class View {
                                 System.out.println(v.getDate());
                                 System.out.println(datee1);
                                 if (v.getDate().equals(datee1)) {
-                                    VacationService.updateVacation(v, in15, datee2);
+                                    VacationService.updateVacation(v, in15, datee2,datee1);
 
                                 }else{
                                     System.out.println("nashod");

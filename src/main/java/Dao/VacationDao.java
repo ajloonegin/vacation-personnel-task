@@ -76,7 +76,7 @@ public class VacationDao {
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, v.getNationalCode());
-            statement.setDate(2, (java.sql.Date) v.getDate());
+            statement.setDate(2, new java.sql.Date(v.getDate().getTime()));
 
             statement.executeUpdate();
             System.out.println("Personnel created.");
@@ -87,15 +87,16 @@ public class VacationDao {
 ;
     }
 
-    public void update(Vacation v, String in15,Date datee) {
+    public void update(Vacation v, String in15,Date datee,Date datee1) {
 
-        String sql = "UPDATE VACATION SET NATIONALCODE = ?, DATE = ? WHERE NATIONALCODE = ?";
+        String sql = "UPDATE VACATION SET NATIONALCODE = ?, DATE = ? WHERE NATIONALCODE = ? AND DATE = ?";
         try (Connection conn = Database.getConnection()){
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, in15);
-            statement.setString(2, String.valueOf(datee));
+            statement.setDate(2, new java.sql.Date(datee.getTime()));
             statement.setString(3, v.getNationalCode());
+            statement.setDate(4, new java.sql.Date(datee1.getTime()));
             statement.executeUpdate();
             System.out.println("table updated.");
 
@@ -116,7 +117,7 @@ public class VacationDao {
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, vd.getNationalCode());
-            statement.setDate(2, (Date) s);
+            statement.setDate(2, (new java.sql.Date(s.getTime())));
             statement.executeUpdate();
             System.out.println("Record in table deleted.");
 

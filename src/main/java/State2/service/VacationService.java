@@ -33,10 +33,10 @@ public class VacationService {
 
     }
 
-    public static void updateVacation(Vacation v, String in15,Date datee){
+    public static void updateVacation(Vacation v, String in15,Date datee,Date datee1){
 //        Storage storage=Storage.getInstance();
         System.out.println("service running");
-        vacationDao.update(v, in15,datee);
+        vacationDao.update(v, in15,datee,datee1);
 
     }
     public static void deleteVacation(Vacation vd,Date s){

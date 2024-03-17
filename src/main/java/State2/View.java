@@ -61,7 +61,8 @@ public class View {
                         if(PersonnelService.validateAddPersonnel(p12)){
                             PersonnelService.addPersonnel(p12);
                             System.out.println("Pesrsonnel added");
-                            PersonnelService.getAll();
+                            Set<Personnel> l=PersonnelService.getAll();
+                            System.out.println(l);
                         }
                     }
                     break;
@@ -102,6 +103,7 @@ public class View {
                     String nc8 = s8.nextLine();
                     if(PersonnelService.validateNationalCode(nc8)){
                         Set<Vacation> res=VacationService.showVacations(nc8);
+                        System.out.println(res);
                     }
 
                     break;
@@ -125,6 +127,8 @@ public class View {
                             String in4 = s13.nextLine();
                             Personnel pu= PersonnelService.getPersonnel(nc9);
                             PersonnelService.updatePersonnel(pu,new String[]{in1,in2,in3, in4});
+                            Set<Personnel> l=PersonnelService.getAll();
+                            System.out.println(l);
                         }
 
                     }
@@ -192,9 +196,10 @@ public class View {
                     System.out.println("Enter Date of vacation");
                     Scanner s27 = new Scanner(System.in);
                     String dateString = s27.next();
-                    SimpleDateFormat sdf13 = new SimpleDateFormat("dd/MM/yyyy");
-                    Date datee3 = null;
+                    SimpleDateFormat sdf13 = new SimpleDateFormat("yyyy-MM-dd");
+                    Date datee3;
                     try {
+
                         datee3 = sdf13.parse(dateString);
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
@@ -203,7 +208,7 @@ public class View {
                         Set<Vacation> vd= VacationService.getVacations(nc18);
                         for (Vacation v : vd) {
                             if (v.getDate().equals(datee3)) {
-                                VacationService.deleteVacation(v);
+                                VacationService.deleteVacation(v,datee3);
 
                             }
                             else {

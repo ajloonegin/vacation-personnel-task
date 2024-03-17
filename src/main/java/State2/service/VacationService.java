@@ -39,8 +39,8 @@ public class VacationService {
         vacationDao.update(v, in15,datee);
 
     }
-    public static void deleteVacation(Vacation vd){
-        vacationDao.delete(vd);
+    public static void deleteVacation(Vacation vd,Date s){
+        vacationDao.delete(vd,s);
 
     }
     public static Set<Vacation> getVacations(String id) {

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 
 public class Database {
-    private static final String JDBC_URL="jdbc:h2:~/test";
+    private static final String JDBC_URL="jdbc:h2:tcp://localhost/~/test";
     private static final String JDBC_DRIVER="org.h2.Driver";
     private static final String USERNAME="Negin";
     private static final String PASS="havij";

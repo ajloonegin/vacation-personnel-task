@@ -2,11 +2,17 @@ package State2.entity;
 
 
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Entity
+@Table(name = "PERSONNEL")
 public class Personnel implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String nationalCode;
     private String firstName;
     private String lastName;
@@ -21,7 +27,8 @@ public class Personnel implements Serializable {
         this.lastName = lastName;
         this.cityName = cityName;
     }
-
+    @Id
+    @Column(name ="NATIONALCODE")
     public String getNationalCode() {
         return nationalCode;
     }
@@ -36,7 +43,7 @@ public class Personnel implements Serializable {
 
 
     }
-
+    @Column(name = "FIRSTNAME")
     public String getFirstName() {
         return firstName;
     }
@@ -44,7 +51,7 @@ public class Personnel implements Serializable {
         this.firstName = firstName;
     }
 
-
+    @Column(name = "LASTNAME")
     public String getLastName() {
         return lastName;
     }
@@ -52,14 +59,21 @@ public class Personnel implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-
+    @Column(name = "CITYNAME")
     public String getCityName() {
         return cityName;
     }
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

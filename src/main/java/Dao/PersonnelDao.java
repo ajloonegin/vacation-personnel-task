@@ -34,6 +34,7 @@ public class PersonnelDao{
             }
             rs.close();
             stmt.close();
+            System.out.println("Not Found");
 
             return null;
         } catch (Exception e) {
@@ -127,6 +128,7 @@ public class PersonnelDao{
             statement.close();
 
         } catch (Exception e) {
+
             e.printStackTrace();
         }
 

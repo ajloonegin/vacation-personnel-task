@@ -35,8 +35,8 @@ public class View {
             //read vaction
             System.out.println("4: Show vacation of personnel");
             //update personnel list
-            System.out.println("5: Update a record of personnel");
-            System.out.println("6: Update a record of vacation");
+            System.out.println("5: Update a record of personnel table");
+            System.out.println("6: Update a record of vacation table");
             System.out.println("7 :delete list of Personnels");
             System.out.println("8 :delete list of vacations");
             System.out.println("9: Exit");

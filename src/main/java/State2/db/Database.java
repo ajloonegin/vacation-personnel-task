@@ -24,6 +24,7 @@ public class Database {
             System.out.println("Connecting to database...");
             con=DriverManager.getConnection(JDBC_URL,USERNAME,PASS);
         }
+        System.out.println("connected");
         return con;
     }
     public void closeConnection() throws SQLException{

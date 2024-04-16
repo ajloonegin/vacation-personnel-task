@@ -30,6 +30,9 @@ public class VacationDao {
                 Vacation vacationFound=new Vacation(NATIONALCODE,DATE);
                 vacationsOfPersonnel.add(vacationFound);
             }
+            if(vacationsOfPersonnel.size()==0){
+                System.out.println("there is nothing in vacation table for this nc");
+            }
             result.close();
             statement.close();
 
@@ -79,7 +82,7 @@ public class VacationDao {
             statement.setDate(2, new java.sql.Date(v.getDate().getTime()));
 
             statement.executeUpdate();
-            System.out.println("Personnel created.");
+            System.out.println("vacation of Personnel is created.");
             statement.close();
         } catch (Exception e) {
             e.printStackTrace();

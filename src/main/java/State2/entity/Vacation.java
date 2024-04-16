@@ -6,8 +6,12 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
-
+@Entity
+@Table(name = "VACATION")
 public class Vacation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     private String nationalCode;
     private Date date;
@@ -19,7 +23,7 @@ public class Vacation {
         this.date = date;
     }
 
-
+    @Column(name = "NATIONALCODE")
     public String getNationalCode() {
         return nationalCode;
     }
@@ -27,13 +31,21 @@ public class Vacation {
     public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
-
+    @Column(name = "DATE")
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
